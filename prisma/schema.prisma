@@ -1,0 +1,80 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_HOST")
+}
+
+model ItemUpdated {
+  id                  Int       @id @default(autoincrement())
+  item                Item      @relation(fields: [itemId], references: [id])
+  itemId              Int
+  name                String?
+  priceAmount         Float?
+  currency            String?
+  priceAdditionalInfo String?
+  location            String?
+  locationMapRef      String?
+  flagTop             Boolean   @default(false)
+  flagHome            Boolean   @default(false)
+  flagUrgent          Boolean   @default(false)
+  datePosted          DateTime
+  dateRenewed         DateTime?
+  categories          String[]
+  properties          String?
+  images              String[]
+  createdAt           DateTime  @default(now())
+  hash                String?
+}
+
+model Item {
+  id            Int           @id @default(autoincrement())
+  listId        String        @unique
+  categoryId    String
+  user          User?         @relation(fields: [userId], references: [id])
+  userId        Int?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime?
+  lastFoundInfo DateTime?
+  ItemUpdated   ItemUpdated[]
+  AutorInfo     AuthorInfo[]
+}
+
+model AuthorInfo {
+  id        Int      @id @default(autoincrement())
+  item      Item     @relation(fields: [itemId], references: [id])
+  itemId    Int
+  name      String
+  avatar    String
+  phones    String[]
+  userUrl   String?
+  hash      String?
+  createdAt DateTime @default(now())
+  jobHash   String   @unique
+  User      User     @relation(fields: [userId], references: [id])
+  userId    Int
+}
+
+model User {
+  id         Int          @id @default(autoincrement())
+  listId     String       @unique
+  Item       Item[]
+  AuthorInfo AuthorInfo[]
+}
+
+model JobInfo {
+  id             Int       @id @default(autoincrement())
+  type           JobType
+  startedAt      DateTime  @default(now())
+  finishedAt     DateTime?
+  done           Boolean   @default(false)
+  additionalInfo String?
+}
+
+enum JobType {
+  CategoryItemLinksParse
+  ItemDetailsParse
+  HomePageParse
+}
+
+generator client {
+  provider = "prisma-client-js"
+}

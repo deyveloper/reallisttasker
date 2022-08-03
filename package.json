@@ -1,0 +1,22 @@
+{
+  "name": "rl",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^3.7.0",
+    "cron": "^1.8.2",
+    "prisma": "^3.7.0",
+    "reallistparser": "git+http://github.com/impythonist/reallistparser.git",
+    "redis": "^4.0.1"
+  },
+  "devDependencies": {
+    "@types/cron": "^1.7.3"
+  }
+}
