@@ -205,10 +205,10 @@ export async function ItemDetailsParse(this: {
                         flagTop: itemParsed.flags.top,
                         flagHome: itemParsed.flags.homepage,
                         flagUrgent: itemParsed.flags.urgent,
-                        datePosted: itemParsed.footer
-                            .datePosted.toDate(),
-                        dateRenewed: itemParsed.footer
-                            .renewed.toDate(),
+                        datePosted: itemParsed?.footer
+                            ?.datePosted?.toDate(),
+                        dateRenewed: itemParsed?.footer
+                            ?.renewed?.toDate(),
                         categories: itemParsed.categories.categories,
                         properties: JSON
                             .stringify(itemParsed.properties),
