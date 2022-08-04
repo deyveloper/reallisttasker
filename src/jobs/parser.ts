@@ -208,7 +208,7 @@ export async function ItemDetailsParse(this: {
                         datePosted: itemParsed.footer
                             .datePosted.toDate(),
                         dateRenewed: itemParsed.footer
-                            ?.renewed.toDate(),
+                            .renewed.toDate(),
                         categories: itemParsed.categories.categories,
                         properties: JSON
                             .stringify(itemParsed.properties),
